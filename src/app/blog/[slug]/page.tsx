@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import remarkGfm from 'remark-gfm';
 import matter from 'gray-matter';
+import Image from 'next/image';
 
 interface PostProps {
   params: {

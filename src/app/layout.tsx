@@ -30,7 +30,7 @@ export default function RootLayout({
           <div className="container mx-auto px-4 py-4">
             <nav className="flex items-center justify-between">
               <Link href="/" className="text-xl font-bold hover:text-gray-600 transition-colors">
-                Sm1le's Blog
+                Sm1le&apos;s personal blog
               </Link>
               <div className="flex space-x-6">
                 <Link href="/about" className="hover:text-gray-600 transition-colors">About Me</Link>
