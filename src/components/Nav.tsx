@@ -19,7 +19,7 @@ export default function Nav() {
           <Link
             href="/about"
             className={`text-[11px] tracking-[2px] uppercase no-underline transition-colors ${
-              pathname === '/about'
+              pathname.startsWith('/about')
                 ? 'text-black border-b border-black pb-0.5'
                 : 'text-gray-500 hover:text-black'
             }`}
@@ -31,7 +31,7 @@ export default function Nav() {
           <Link
             href="/blog"
             className={`text-[11px] tracking-[2px] uppercase no-underline transition-colors ${
-              pathname === '/blog'
+              pathname.startsWith('/blog')
                 ? 'text-black border-b border-black pb-0.5'
                 : 'text-gray-500 hover:text-black'
             }`}
