@@ -85,9 +85,10 @@ export default function AboutPage() {
       <section className="mb-12">
         <SectionLabel>联系</SectionLabel>
         <div className="flex gap-6">
-          <a href="https://github.com" className="text-[11px] tracking-[1.5px] uppercase text-[#111] border-b border-[#ddd] pb-0.5 no-underline hover:border-[#111] transition-colors">GitHub</a>
-          <a href="https://twitter.com" className="text-[11px] tracking-[1.5px] uppercase text-[#111] border-b border-[#ddd] pb-0.5 no-underline hover:border-[#111] transition-colors">Twitter</a>
-          <a href="mailto:hello@example.com" className="text-[11px] tracking-[1.5px] uppercase text-[#111] border-b border-[#ddd] pb-0.5 no-underline hover:border-[#111] transition-colors">Email</a>
+          {/* TODO: replace with actual profile URLs */}
+          <a href="https://github.com/sm1le" className="text-[11px] tracking-[1.5px] uppercase text-[#111] border-b border-[#ddd] pb-0.5 no-underline hover:border-[#111] transition-colors">GitHub</a>
+          <a href="https://twitter.com/sm1le" className="text-[11px] tracking-[1.5px] uppercase text-[#111] border-b border-[#ddd] pb-0.5 no-underline hover:border-[#111] transition-colors">Twitter</a>
+          <a href="mailto:hello@sm1le.dev" className="text-[11px] tracking-[1.5px] uppercase text-[#111] border-b border-[#ddd] pb-0.5 no-underline hover:border-[#111] transition-colors">Email</a>
         </div>
       </section>
 
