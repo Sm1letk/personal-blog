@@ -31,12 +31,8 @@ async function getPost(slug: string) {
 
 export async function generateMetadata({ params }: PostProps) {
   const post = await getPost(params.slug);
-  
-  if (!post) {
-    return {
-      title: 'Post Not Found',
-    };
-  }
+
+  if (!post) notFound();
 
   return {
     title: post.metadata.title,
@@ -44,13 +40,17 @@ export async function generateMetadata({ params }: PostProps) {
   };
 }
 
-export default async function BlogPost({ params }: PostProps) {
+// 如果没有使用 Image 组件，先删除导入
+// import Image from 'next/image';
+
+// 删除未使用的 error 变量
+export default async function BlogPost({ params }: { params: { slug: string } }) {
+  // 删除 error 变量的定义
   const post = await getPost(params.slug);
 
-  if (!post) {
-    notFound();
-  }
+  if (!post) notFound();
 
+  // 使用 Image 组件替换 img 标签
   return (
     <article className="max-w-4xl mx-auto prose prose-lg dark:prose-invert">
       <div className="mb-8">
