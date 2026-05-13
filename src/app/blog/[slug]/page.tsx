@@ -6,12 +6,6 @@ import remarkGfm from 'remark-gfm';
 import matter from 'gray-matter';
 import Image from 'next/image';
 
-interface PostProps {
-  params: {
-    slug: string;
-  };
-}
-
 async function getPost(slug: string) {
   const postsDirectory = path.join(process.cwd(), 'src/content/posts');
   const fullPath = path.join(postsDirectory, `${slug}.md`);
@@ -19,18 +13,19 @@ async function getPost(slug: string) {
   try {
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
-    
+
     return {
       metadata: data,
       content,
     };
-  } catch (error) {
+  } catch {
     return null;
   }
 }
 
-export async function generateMetadata({ params }: PostProps) {
-  const post = await getPost(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getPost(slug);
 
   if (!post) notFound();
 
@@ -40,17 +35,12 @@ export async function generateMetadata({ params }: PostProps) {
   };
 }
 
-// 如果没有使用 Image 组件，先删除导入
-// import Image from 'next/image';
-
-// 删除未使用的 error 变量
-export default async function BlogPost({ params }: { params: { slug: string } }) {
-  // 删除 error 变量的定义
-  const post = await getPost(params.slug);
+export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getPost(slug);
 
   if (!post) notFound();
 
-  // 使用 Image 组件替换 img 标签
   return (
     <article className="max-w-4xl mx-auto prose prose-lg dark:prose-invert">
       <div className="mb-8">
@@ -68,10 +58,11 @@ export default async function BlogPost({ params }: { params: { slug: string } })
       </div>
       {post.metadata.image && (
         <div className="relative h-96 mb-8 rounded-lg overflow-hidden">
-          <img
+          <Image
             src={post.metadata.image}
             alt={post.metadata.title}
-            className="object-cover w-full h-full"
+            fill
+            className="object-cover"
           />
         </div>
       )}
