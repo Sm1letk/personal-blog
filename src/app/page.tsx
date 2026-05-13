@@ -1,87 +1,77 @@
-import Image from "next/image";
-import Link from "next/link";
+import Link from 'next/link'
+import { getAllPosts } from '@/lib/posts'
 
-export default function Home() {
+const CATEGORIES = [
+  { num: '01', title: '生活思考', desc: '日常观察与个人反思' },
+  { num: '02', title: 'AI 领域探索', desc: 'AI 工具与应用实践' },
+  { num: '03', title: '摄影', desc: '街头影像与光影记录' },
+  { num: '04', title: '语言与文化', desc: '语言学习与跨文化思考' },
+]
+
+export default function HomePage() {
+  const posts = getAllPosts().slice(0, 5)
+
   return (
-    <div className="max-w-4xl mx-auto text-center">
-      <section className="mb-16">
-        <h1 className="text-4xl font-bold mb-4">Sm1le's Odyssey</h1>
-        <div className="text-lg text-gray-600 mb-8 space-y-2">
-          <p>Life is an odyssey of learning, creating, and evolving.</p>
-          <p>Here's my journey through AI and personal growth</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Link href="/life" className="group p-6 border rounded-lg hover:border-gray-400 transition-colors">
-            <h2 className="text-xl font-semibold mb-2 group-hover:text-gray-600">生活思考</h2>
-            <p className="text-gray-600">健身、音乐、人际关系、教育对比等个人随笔</p>
-          </Link>
-          <Link href="/ai" className="group p-6 border rounded-lg hover:border-gray-400 transition-colors">
-            <h2 className="text-xl font-semibold mb-2 group-hover:text-gray-600">AI领域探索</h2>
-            <p className="text-gray-600">AI工具应用场景、技术趋势与深度思考</p>
-          </Link>
-          <Link href="/photography" className="group p-6 border rounded-lg hover:border-gray-400 transition-colors">
-            <h2 className="text-xl font-semibold mb-2 group-hover:text-gray-600">摄影</h2>
-            <p className="text-gray-600">月度摄影集、旅行专辑、摄影技巧分享</p>
-          </Link>
-          <Link href="/culture" className="group p-6 border rounded-lg hover:border-gray-400 transition-colors">
-            <h2 className="text-xl font-semibold mb-2 group-hover:text-gray-600">语言与文化</h2>
-            <p className="text-gray-600">语言学习方法、多语种探索、文化交流思考</p>
-          </Link>
-        </div>
+    <div className="max-w-[760px] mx-auto px-6">
+      {/* Hero */}
+      <section className="text-center py-16 pb-12 border-b border-[#ddd]">
+        <h1 className="text-[42px] font-bold tracking-[-1.5px] text-[#111] leading-none mb-0" style={{ fontFamily: 'Georgia, serif' }}>
+          Sm1le&apos;s Odyssey
+        </h1>
+        <div className="w-12 h-0.5 bg-black mx-auto my-3" />
+        <p className="text-[14px] italic text-[#666]" style={{ fontFamily: 'Georgia, serif' }}>记录 AI 与生活的交汇处</p>
       </section>
-      
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-6">最新文章</h2>
-        <div className="space-y-6">
-          <div className="p-6 border rounded-lg hover:border-gray-400 transition-colors">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-gray-500">2024-01-20</span>
-              <span className="text-sm text-gray-500 flex items-center gap-1">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-                1.2k
-              </span>
-            </div>
-            <h3 className="text-xl font-semibold mb-2">January in Frames: 冬日街头掠影</h3>
-            <p className="text-gray-600 mb-4">本月的街头摄影集锦，记录城市中的温暖瞬间...</p>
-            <div className="relative h-48 mb-4 rounded-lg overflow-hidden">
-              <Image
-                src="/images/winter-street.jpg"
-                alt="冬日街头掠影"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <Link href="/blog/winter-street" className="text-blue-600 hover:text-blue-800 transition-colors">阅读全文 →</Link>
-          </div>
 
-          <div className="p-6 border rounded-lg hover:border-gray-400 transition-colors">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-gray-500">2024-01-15</span>
-              <span className="text-sm text-gray-500 flex items-center gap-1">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-                856
-              </span>
-            </div>
-            <h3 className="text-xl font-semibold mb-2">AI助手在日常工作中的实践与思考</h3>
-            <p className="text-gray-600 mb-4">探讨如何有效地将AI工具整合到日常工作流程中...</p>
-            <div className="relative h-48 mb-4 rounded-lg overflow-hidden">
-              <Image
-                src="/images/ai-workspace.jpg"
-                alt="AI工作流程"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <Link href="/blog/ai-workspace" className="text-blue-600 hover:text-blue-800 transition-colors">阅读全文 →</Link>
-          </div>
+      {/* Category Grid */}
+      <section className="py-10">
+        <div className="text-[10px] tracking-[3px] uppercase text-[#aaa] mb-5">探索</div>
+        <div className="border border-[#111] grid grid-cols-2">
+          {CATEGORIES.map((cat, i) => {
+            const isRightCol = i % 2 === 1
+            const isLastRow = i >= 2
+            return (
+              <div
+                key={cat.num}
+                className={`p-6 cursor-default transition-colors hover:bg-[#f9f9f9] ${!isRightCol ? 'border-r border-[#111]' : ''} ${!isLastRow ? 'border-b border-[#111]' : ''}`}
+              >
+                <div className="text-[10px] tracking-[2px] uppercase text-[#aaa] mb-2">{cat.num}</div>
+                <div className="text-[15px] font-bold text-[#111] mb-1" style={{ fontFamily: 'Georgia, serif' }}>{cat.title}</div>
+                <div className="text-[12px] text-[#888]">{cat.desc}</div>
+              </div>
+            )
+          })}
         </div>
       </section>
+
+      {/* Recent Articles */}
+      <section className="py-10">
+        <div className="text-[10px] tracking-[3px] uppercase text-[#aaa] mb-5">最新文章</div>
+        <div>
+          {posts.map((post, idx) => (
+            <div key={post.slug} className={`py-5 flex justify-between items-start gap-8 ${idx < posts.length - 1 ? 'border-b border-[#eee]' : ''}`}>
+              <div>
+                <div className="text-[10px] tracking-[1.5px] uppercase text-[#bbb] mb-1">
+                  {post.category} · {post.date}
+                </div>
+                <div className="text-[18px] font-bold text-[#111] leading-snug mb-1" style={{ fontFamily: 'Georgia, serif' }}>{post.title}</div>
+                <div className="text-[12px] text-[#777] leading-relaxed mb-2">{post.excerpt}</div>
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="text-[10px] tracking-[1.5px] uppercase text-[#111] border-b border-[#111] pb-px no-underline hover:text-[#666]"
+                >
+                  阅读全文
+                </Link>
+              </div>
+              <div className="text-[11px] text-[#ccc] whitespace-nowrap shrink-0 mt-1">— 次阅读</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t-2 border-black py-6 text-center">
+        <div className="text-[10px] tracking-[2px] uppercase text-[#bbb]">© 2025 Sm1le&apos;s Odyssey</div>
+      </footer>
     </div>
-  );
+  )
 }
