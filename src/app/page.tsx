@@ -15,11 +15,11 @@ export default function HomePage() {
     <div className="max-w-[760px] mx-auto px-6">
       {/* Hero */}
       <section className="text-center py-16 pb-12 border-b border-[#ddd]">
-        <h1 className="text-[42px] font-bold tracking-[-1.5px] text-[#111] leading-none mb-0" style={{ fontFamily: 'Georgia, serif' }}>
+        <h1 className="text-[42px] font-bold tracking-[-1.5px] text-[#111] leading-none mb-0">
           Sm1le&apos;s Odyssey
         </h1>
         <div className="w-12 h-0.5 bg-black mx-auto my-3" />
-        <p className="text-[14px] italic text-[#666]" style={{ fontFamily: 'Georgia, serif' }}>记录 AI 与生活的交汇处</p>
+        <p className="text-[14px] italic text-[#666]">记录 AI 与生活的交汇处</p>
       </section>
 
       {/* Category Grid */}
@@ -35,7 +35,7 @@ export default function HomePage() {
                 className={`p-6 cursor-default transition-colors hover:bg-[#f9f9f9] ${!isRightCol ? 'border-r border-[#111]' : ''} ${!isLastRow ? 'border-b border-[#111]' : ''}`}
               >
                 <div className="text-[10px] tracking-[2px] uppercase text-[#aaa] mb-2">{cat.num}</div>
-                <div className="text-[15px] font-bold text-[#111] mb-1" style={{ fontFamily: 'Georgia, serif' }}>{cat.title}</div>
+                <div className="text-[15px] font-bold text-[#111] mb-1">{cat.title}</div>
                 <div className="text-[12px] text-[#888]">{cat.desc}</div>
               </div>
             )
@@ -53,7 +53,7 @@ export default function HomePage() {
                 <div className="text-[10px] tracking-[1.5px] uppercase text-[#bbb] mb-1">
                   {post.category} · {post.date}
                 </div>
-                <div className="text-[18px] font-bold text-[#111] leading-snug mb-1" style={{ fontFamily: 'Georgia, serif' }}>{post.title}</div>
+                <div className="text-[18px] font-bold text-[#111] leading-snug mb-1">{post.title}</div>
                 <div className="text-[12px] text-[#777] leading-relaxed mb-2">{post.excerpt}</div>
                 <Link
                   href={`/blog/${post.slug}`}
