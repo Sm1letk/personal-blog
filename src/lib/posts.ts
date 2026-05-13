@@ -6,6 +6,12 @@ import { getCategoryLabel } from './categories'
 const POSTS_DIR = path.join(process.cwd(), 'src/content/posts')
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/
 
+function parseDate(raw: unknown, context: string): string {
+  if (typeof raw === 'string' && DATE_RE.test(raw)) return raw
+  console.warn(`[posts] Missing or invalid date in ${context}, falling back to 1970-01-01`)
+  return '1970-01-01'
+}
+
 export interface PostMeta {
   slug: string
   title: string
@@ -26,11 +32,7 @@ export function getAllPosts(): PostMeta[] {
       const source = fs.readFileSync(path.join(POSTS_DIR, file), 'utf-8')
       const { data } = matter(source)
 
-      const date: string = DATE_RE.test(data.date ?? '') ? data.date : '1970-01-01'
-      if (!DATE_RE.test(data.date ?? '')) {
-        console.warn(`[posts] Missing or invalid date in ${file}, falling back to 1970-01-01`)
-      }
-
+      const date = parseDate(data.date, file)
       const category: string = data.category ?? 'uncategorized'
 
       return {
@@ -46,6 +48,8 @@ export function getAllPosts(): PostMeta[] {
 }
 
 export function getPost(slug: string): { meta: PostMeta; content: string } | null {
+  if (!/^[\w-]+$/.test(slug)) return null
+
   const mdxPath = path.join(POSTS_DIR, `${slug}.mdx`)
   const mdPath = path.join(POSTS_DIR, `${slug}.md`)
   const filePath = fs.existsSync(mdxPath) ? mdxPath : fs.existsSync(mdPath) ? mdPath : null
@@ -55,7 +59,7 @@ export function getPost(slug: string): { meta: PostMeta; content: string } | nul
   const source = fs.readFileSync(filePath, 'utf-8')
   const { data, content } = matter(source)
 
-  const date: string = DATE_RE.test(data.date ?? '') ? data.date : '1970-01-01'
+  const date = parseDate(data.date, slug)
   const category: string = data.category ?? 'uncategorized'
 
   return {
